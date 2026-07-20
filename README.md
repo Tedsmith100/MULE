@@ -74,7 +74,7 @@ In BibTex format:
 @software{john_waiton_2026_18418498,
   author       = {John Waiton and
                   Brais Palmeiro and
-                  Matthew Millns
+                  Matthew Millns and
                   Ian Osborne and
                   Mathias Zurbriggen
                   },
