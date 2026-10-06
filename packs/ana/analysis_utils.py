@@ -245,11 +245,11 @@ def window_overlap_check(window_args: dict):
     # Define intervals
     w_start, w_end = WINDOW_START, WINDOW_END
 
-    b1_start = BASELINE_POINT_1 - BASELINE_RANGE_1 / 2
-    b1_end   = BASELINE_POINT_1 + BASELINE_RANGE_1 / 2
+    b1_start = BASELINE_POINT_1 - BASELINE_RANGE_1
+    b1_end   = BASELINE_POINT_1 + BASELINE_RANGE_1
 
-    b2_start = BASELINE_POINT_2 - BASELINE_RANGE_2 / 2
-    b2_end   = BASELINE_POINT_2 + BASELINE_RANGE_2 / 2
+    b2_start = BASELINE_POINT_2 - BASELINE_RANGE_2
+    b2_end   = BASELINE_POINT_2 + BASELINE_RANGE_2
 
     # Check for negative values
     if (w_start < 0 or w_end < 0 or
