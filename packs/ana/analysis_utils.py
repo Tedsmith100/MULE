@@ -290,7 +290,7 @@ def window_wf_check(wf : np.ndarray,
     BASELINE_POINT_2 = window_args['BASELINE_POINT_2']
     BASELINE_RANGE_1 = window_args['BASELINE_RANGE_1']
     BASELINE_RANGE_2 = window_args['BASELINE_RANGE_2']
-    if WINDOW_START>length or WINDOW_END>length or BASELINE_POINT_1+BASELINE_RANGE_1/2>length or BASELINE_POINT_2+BASELINE_RANGE_2>length:
+    if WINDOW_START>length or WINDOW_END>length or BASELINE_POINT_1+BASELINE_RANGE_1>length or BASELINE_POINT_2+BASELINE_RANGE_2>length:
         return False
     else:
         return True
