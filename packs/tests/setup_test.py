@@ -70,3 +70,24 @@ def test_processing_catches(config, error, MULE_dir, data_dir):
         subprocess.run(run_pack, check = True)
   
         
+@mark.parametrize("config, error", [('ana_negative_window.conf',          ValueError),
+                                    ('ana_inverted_window.conf',          ValueError),
+                                    ('ana_baseline_overlaps_window.conf', ValueError),
+                                    ('ana_baselines_overlap.conf',        ValueError),
+                                    ('ana_missing_window_key.conf',       KeyError),
+                                    ('ana_missing_window_args.conf',      KeyError),
+                                    ('ana_missing_save_path.conf',        KeyError),
+                                    ('ana_missing_bin_size.conf',         TypeError),
+                                    ('ana_unknown_key.conf',              TypeError),
+                                    ('ana_nonexistent_file.conf',         ValueError),
+                                    ('ana_empty_files.conf',              ValueError),
+                                    ('ana_bad_baseline_mode.conf',        ValueError),
+                                    ('ana_save_dir_missing.conf',         FileNotFoundError)])
+def test_ana_catches(config, error, MULE_dir, data_dir):
+
+    config_path = data_dir + "configs/" + config
+
+    run_pack = [sys.executable, MULE_dir + "/bin/mule", "ana", config_path]
+
+    with raises(subprocess.CalledProcessError):
+        subprocess.run(run_pack, check = True)
