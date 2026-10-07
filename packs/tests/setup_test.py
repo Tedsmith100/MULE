@@ -56,7 +56,7 @@ def test_malformed_config(config, error, data_dir):
         x = read_config_file(file_path)
 
 @mark.parametrize("config, error", [('nonexistent_WD_version.conf', RuntimeError),
-                                    ('nonexistent_process.conf', ValueError),
+                                    ('nonexistent_process.conf', RuntimeError),
                                     ('single_multi_chan.conf', RuntimeError)])
                                     # these will change to value errors when other
                                     # packs are implemented
@@ -66,8 +66,9 @@ def test_processing_catches(config, error, MULE_dir, data_dir):
 
     run_pack = [sys.executable, MULE_dir + "/bin/mule", "proc", config_path]
 
-    with raises(subprocess.CalledProcessError):
-        subprocess.run(run_pack, check = True)
+    with raises(subprocess.CalledProcessError) as excinfo:
+        subprocess.run(run_pack, check=True, capture_output=True, text=True)
+    assert error.__name__ in excinfo.value.stderr
   
         
 @mark.parametrize("config, error", [('ana_negative_window.conf',          ValueError),
