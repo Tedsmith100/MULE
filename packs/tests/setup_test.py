@@ -82,7 +82,8 @@ def test_processing_catches(config, error, MULE_dir, data_dir):
                                     ('ana_nonexistent_file.conf',         ValueError),
                                     ('ana_empty_files.conf',              ValueError),
                                     ('ana_bad_baseline_mode.conf',        ValueError),
-                                    ('ana_save_dir_missing.conf',         FileNotFoundError)])
+                                    ('ana_save_dir_missing.conf',         FileNotFoundError),
+                                    ('ana_files_not_list.conf', TypeError)])
 def test_ana_catches(config, error, MULE_dir, data_dir):
 
     config_path = data_dir + "configs/" + config
