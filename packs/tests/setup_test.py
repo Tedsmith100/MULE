@@ -67,7 +67,7 @@ def test_processing_catches(config, error, MULE_dir, data_dir):
     run_pack = [sys.executable, MULE_dir + "/bin/mule", "proc", config_path]
 
     with raises(subprocess.CalledProcessError) as excinfo:
-        subprocess.run(run_pack, check=True, capture_output=True, text=True)
+        subprocess.run(run_pack, check=True, capture_output=True, text=True, cwd = data_dir)
     assert error.__name__ in excinfo.value.stderr
   
         
