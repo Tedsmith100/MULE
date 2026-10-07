@@ -20,21 +20,22 @@ def ana(config_file : str) -> (np.ndarray):
 
     window_overlap_check(window_args)
 
-    if isinstance(conf_args["files"], list):
-        print("Averaging waveform....")
-
-        checked_save_path = check_save_path(
-            save_path,
-            overwrite
+    if not isinstance(conf_args["files"], list):
+        raise TypeError(
+            f"'files' must be a list of file paths, got {type(conf_args['files']).__name__}"
         )
+    print("Averaging waveform....")
 
-        avgwf = average_waveforms(**conf_args)
+    checked_save_path = check_save_path(
+        save_path,
+        overwrite
+    )
 
-        with h5py.File(checked_save_path, 'w') as f:     # Save as a h5
-            f.create_dataset('Average_waveform', data=avgwf)
+    avgwf = average_waveforms(**conf_args)
 
-        print(f"Saved to: {checked_save_path}")
+    with h5py.File(checked_save_path, 'w') as f:     # Save as a h5
+        f.create_dataset('Average_waveform', data=avgwf)
 
-    else:
-        print("Please input files as a list.")
+    print(f"Saved to: {checked_save_path}")
+
     return
