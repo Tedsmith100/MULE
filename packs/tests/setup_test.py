@@ -89,5 +89,7 @@ def test_ana_catches(config, error, MULE_dir, data_dir):
 
     run_pack = [sys.executable, MULE_dir + "/bin/mule", "ana", config_path]
 
-    with raises(subprocess.CalledProcessError):
-        subprocess.run(run_pack, check = True)
+    with raises(subprocess.CalledProcessError) as excinfo:
+        subprocess.run(run_pack, check=True, capture_output=True, text=True)
+    assert error.__name__ in excinfo.value.stderr
+        
